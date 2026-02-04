@@ -20,7 +20,7 @@
             font-family: 'Impact', 'Arial Black', sans-serif;
         }
 
-        /* Fondo con tu imagen de Los Simpsons */
+        /* Fondo con la imagen del tribunal */
         .background {
             position: fixed;
             top: 0;
@@ -33,48 +33,53 @@
             z-index: 1;
         }
 
-        /* Contenedor posicionado ARRIBA */
+        /* Cuadro posicionado en la parte SUPERIOR */
         .main-ui {
             position: relative;
             z-index: 10;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Lo mueve hacia arriba */
+            justify-content: flex-start; 
             height: 100vh;
-            padding-top: 50px; /* Espacio desde el borde superior */
+            padding-top: 40px; 
         }
 
         .alert-box {
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(15px);
-            padding: 30px 50px;
+            padding: 30px 60px;
             border-radius: 20px;
             border: 3px solid var(--gold);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
             text-align: center;
             color: white;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: var(--gold);
             margin: 0;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px #000;
+            text-shadow: 3px 3px #000;
         }
 
-        p {
+        .expediente {
             font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin: 10px 0 25px 0;
-            color: #ccc;
+            color: #ff4b2b;
+            font-weight: bold;
         }
 
-        /* Botón de Acción */
         .btn-reveal {
-            padding: 20px 40px;
-            font-size: 1.4rem;
+            padding: 20px 50px;
+            font-size: 1.5rem;
             font-weight: bold;
             color: white;
             background: linear-gradient(45deg, #d40000, #ff4b2b);
@@ -83,23 +88,22 @@
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(212, 0, 0, 0.5);
+            box-shadow: 0 5px 20px rgba(212, 0, 0, 0.6);
         }
 
         .btn-reveal:hover {
             transform: scale(1.1);
-            background: linear-gradient(45deg, #ff4b2b, #d40000);
-            box-shadow: 0 0 40px rgba(255, 75, 43, 0.7);
+            box-shadow: 0 0 50px rgba(255, 75, 43, 0.8);
         }
 
-        /* Capa de Sirenas */
+        /* Efecto Sirenas */
         #police-lights {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 100;
-            opacity: 0.5;
-            animation: siren-flash 0.2s infinite;
+            opacity: 0.6;
+            animation: siren-flash 0.15s infinite;
         }
 
         @keyframes siren-flash {
@@ -108,7 +112,6 @@
             100% { background: var(--police-red); }
         }
 
-        /* Video Overlay */
         #video-container {
             display: none;
             position: fixed;
@@ -119,7 +122,6 @@
 
         video { width: 100%; height: 100%; object-fit: contain; }
 
-        /* Lluvia de dinero mejorada */
         .money {
             position: absolute;
             top: -100px;
@@ -143,7 +145,7 @@
     <div class="main-ui">
         <div class="alert-box">
             <h1>TU FUTURO</h1>
-            <p>EXPEDIENTE #404-CORRUPCIÓN</p>
+            <div class="expediente">EXPEDIENTE #404-CORRUPCIÓN DETECTADA</div>
             <button class="btn-reveal" onclick="iniciarBroma()">VER EVIDENCIA DEL SOBORNO 💼</button>
         </div>
     </div>
@@ -157,7 +159,7 @@
     <script>
         function rainingMoney() {
             const container = document.getElementById('money-container');
-            const emojis = ['💰', '💸', '💵', '🤑', '⚖️'];
+            const emojis = ['💰', '💸', '💵', '⚖️', '⛓️'];
             setInterval(() => {
                 const m = document.createElement('div');
                 m.className = 'money';
@@ -174,7 +176,6 @@
             const videoContainer = document.getElementById('video-container');
             const lights = document.getElementById('police-lights');
 
-            // Activa efectos
             lights.style.display = 'block';
             
             setTimeout(() => {
@@ -182,10 +183,10 @@
                 video.play();
                 
                 video.onended = () => {
-                    alert("¡ESTÁS BAJO ARRESTO, LICENCIADO! ⛓️\nSe acabó la corrupción.");
+                    alert("¡ESTÁS BAJO ARRESTO POR CORRUPTO! ⛓️");
                     location.reload();
                 };
-            }, 500); // Pequeño delay para el susto
+            }, 600);
         }
 
         window.onload = rainingMoney;
